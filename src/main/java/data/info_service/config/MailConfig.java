@@ -1,8 +1,10 @@
-package data.info_service;
+package data.info_service.config;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -13,6 +15,7 @@ import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:mailAuth.yml")
+@ConfigurationProperties(prefix = "mail")
 @Getter
 @Setter
 @ToString

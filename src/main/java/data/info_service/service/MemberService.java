@@ -1,4 +1,10 @@
 package data.info_service.service;
 
-public class AuthService {
+import data.info_service.Member;
+
+public class MemberService {
+
+    private void add(Member member) {
+
+    }
 }

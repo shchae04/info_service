@@ -43,7 +43,7 @@ public class AuthController {
         message.addRecipients(MimeMessage.RecipientType.TO, "shchae04@naver.com");
         message.setSubject("공고문 올라옴");
         String body = "<div>"
-                + "<h1> 안녕하세요. Artify 입니다</h1>"
+                + "<h1> 안녕하세요. INFO_SERVICE 입니다</h1>"
                 + "<br>"
                 + "<p>아래 링크를 클릭하면 이메일 인증이 완료됩니다.<p>"
                 + "</div>";

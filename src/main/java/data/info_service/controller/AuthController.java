@@ -1,5 +1,7 @@
 package data.info_service.controller;
 
+import data.info_service.entity.Member;
+import data.info_service.entity.Role;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +41,16 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Token");
         }
 
+        Member member = Member.builder()
+                .email("shchae04@naver.com")
+                .role(Role.SYS_USER)
+                .password("1111")
+                .build();
+
         String email = tokenParts[0];
+        if (!member.getEmail().equalsIgnoreCase(email)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("INVALID EMAIL!!");
+        }
         Long tokenTime = Long.parseLong(tokenParts[1]);
 
         long currentTime = System.currentTimeMillis();

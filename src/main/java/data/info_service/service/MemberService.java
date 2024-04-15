@@ -6,18 +6,22 @@ import data.info_service.exception.LoginFailureException;
 import data.info_service.exception.MemberEmailAlreadyExistsException;
 import data.info_service.repository.MemberRepository;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
     @Transactional
     public MemberRegisterResponseDto registerMember(MemberRegisterRequestDto requestDto) {
+
+        log.info("register member={}", requestDto);
         validateDuplicated(requestDto.getEmail());
 
         Member member = memberRepository.save(
@@ -44,11 +48,8 @@ public class MemberService {
         return new MemberLoginResponseDto(member.getId(), "token");
     }
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    static class MemberRegisterResponseDto {
+    @Data
+    public class MemberRegisterResponseDto {
         private Long id;
         private String email;
         private Role role;
@@ -60,22 +61,24 @@ public class MemberService {
         }
     }
 
+    @Data
+    public class MemberRegisterRequestDto {
+        private String email;
+        private Role role;
+        private String message;
+        private String password;
+
+        public MemberRegisterRequestDto(String email, String password) {
+            this.email = email;
+            this.password = password;
+        }
+    }
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    static class MemberRegisterRequestDto {
-        private String email;
-        private Role role;
-        private String message;
-        private String password;
-    }
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    private class MemberLoginResponseDto {
+    public class MemberLoginResponseDto {
         private Long id;
 
         private String token;
@@ -88,11 +91,12 @@ public class MemberService {
         }
 
     }
+
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    private class MemberLoginRequestDto {
+    public class MemberLoginRequestDto {
         private Long id;
 
         private String email;

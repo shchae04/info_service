@@ -28,7 +28,7 @@ public class MailConfig {
     public JavaMailSender javaMailSenderService() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
-        javaMailSender.setHost("smtp.naver.com");
+        javaMailSender.setHost("smtp.mailplug.co.kr");
         javaMailSender.setUsername(username);
         javaMailSender.setPassword(password);
         javaMailSender.setPort(465);
@@ -43,7 +43,7 @@ public class MailConfig {
         properties.setProperty("mail.smtp.auth", "true"); // smtp 인증
         properties.setProperty("mail.smtp.starttls.enable", "true"); // smtp strattles 사용
         properties.setProperty("mail.debug", "true"); // 디버그 사용
-        properties.setProperty("mail.smtp.ssl.trust","smtp.naver.com"); // ssl 인증 서버는 smtp.naver.com
+        properties.setProperty("mail.smtp.ssl.trust","smtp.mailplug.co.kr"); // ssl 인증 서버는 smtp.naver.com
         properties.setProperty("mail.smtp.ssl.enable","true"); // ssl 사용
         return properties;
     }

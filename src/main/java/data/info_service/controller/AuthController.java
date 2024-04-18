@@ -68,7 +68,7 @@ public class AuthController {
     @PostMapping("/sendMail")
     public Object signup() throws Exception {
 
-        String email = "shchae04@naver.com";
+        String email = "shchae04@b2bcni.co.kr";
 
         String token = createToken(email);
 
@@ -88,7 +88,7 @@ public class AuthController {
                 + "인증</a></button>"
                 + "</div>";
         message.setText(body, "utf-8", "html");
-        message.setFrom(new InternetAddress("shchae04@naver.com", "SYS_SH_CORP"));
+        message.setFrom(new InternetAddress("shchae04@b2bcni.co.kr", "SYS_SH_CORP"));
         mailSender.send(message);
         return "OK";
     }

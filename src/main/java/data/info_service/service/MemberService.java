@@ -30,6 +30,7 @@ public class MemberService {
                         .password(requestDto.getPassword())
                         .build()
         );
+        log.info("Member Registered");
 
         return new MemberRegisterResponseDto(member.getId(), member.getEmail());
     }

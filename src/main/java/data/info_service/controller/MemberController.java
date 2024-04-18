@@ -1,9 +1,13 @@
 package data.info_service.controller;
 
+import data.info_service.entity.Member;
+import data.info_service.entity.Role;
 import data.info_service.service.MemberService;
 import data.info_service.service.MemberService.MemberRegisterRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,11 +26,14 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String joinMember(@ModelAttribute MemberRegisterRequestDto member) {
+    @ResponseBody
+    public String joinMember(@RequestParam("email") String email, @RequestParam("password") String password) {
         log.info("join 요청");
-        log.info("member={}", member);
 
-        memberService.registerMember(member);
-        return "home";
+//        MemberRegisterRequestDto req = new MemberRegisterRequestDto(email, password);
+
+//        memberService.registerMember(req);
+        return ResponseEntity.ok("OK").toString();
     }
+
 }

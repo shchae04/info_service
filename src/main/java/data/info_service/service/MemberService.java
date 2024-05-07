@@ -1,5 +1,9 @@
 package data.info_service.service;
 
+import data.info_service.dto.MemberLoginRequestDto;
+import data.info_service.dto.MemberLoginResponseDto;
+import data.info_service.dto.MemberRegisterRequestDto;
+import data.info_service.dto.MemberRegisterResponseDto;
 import data.info_service.entity.Member;
 import data.info_service.entity.Role;
 import data.info_service.exception.LoginFailureException;
@@ -32,7 +36,7 @@ public class MemberService {
         );
         log.info("Member Registered");
 
-        return new MemberRegisterResponseDto(member.getId(), member.getEmail());
+        return new MemberRegisterResponseDto();
     }
 
 
@@ -46,62 +50,8 @@ public class MemberService {
         if (!requestDto.getPassword().equalsIgnoreCase(member.getPassword())) {
             throw new LoginFailureException();
         }
-        return new MemberLoginResponseDto(member.getId(), "token");
+        return new MemberLoginResponseDto();
     }
 
-    @Data
-    public class MemberRegisterResponseDto {
-        private Long id;
-        private String email;
-        private Role role;
-        private String message;
 
-        public MemberRegisterResponseDto(Long id, String email) {
-            this.id = id;
-            this.email = email;
-        }
-    }
-
-    @Data
-    public class MemberRegisterRequestDto {
-        private String email;
-        private Role role;
-        private String message;
-        private String password;
-
-        public MemberRegisterRequestDto(String email, String password) {
-            this.email = email;
-            this.password = password;
-        }
-    }
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public class MemberLoginResponseDto {
-        private Long id;
-
-        private String token;
-        private String email;
-        private String password;
-
-        public MemberLoginResponseDto(Long id, String token) {
-            this.id = id;
-            this.token = token;
-        }
-
-    }
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public class MemberLoginRequestDto {
-        private Long id;
-
-        private String email;
-        private String password;
-
-    }
 }

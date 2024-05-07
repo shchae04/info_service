@@ -1,12 +1,10 @@
 package data.info_service.controller;
 
-import data.info_service.entity.Member;
-import data.info_service.entity.Role;
+import data.info_service.dto.MemberLoginRequestDto;
+import data.info_service.dto.MemberRegisterRequestDto;
 import data.info_service.service.MemberService;
-import data.info_service.service.MemberService.MemberRegisterRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,21 +17,31 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/join")
-    public String join() {
-        // 페이지 생성
-        return "member/join";
+    @GetMapping("/login")
+    public String login() {
+        return "member/login";
     }
 
-    @PostMapping("/join")
-    @ResponseBody
-    public String joinMember(@RequestParam("email") String email, @RequestParam("password") String password) {
+    @GetMapping("/signup")
+    public String join() {
+        // 페이지 생성
+        return "member/signup";
+    }
+
+
+    @PostMapping("/login")
+    public String login(MemberLoginRequestDto loginRequestDto) {
+        memberService.loginMember(loginRequestDto);
+
+        return "redirect:/main";
+    }
+
+    @PostMapping("/signup")
+    public String joinMember(MemberRegisterRequestDto registerRequestDto) {
         log.info("join 요청");
+        memberService.registerMember(registerRequestDto);
 
-//        MemberRegisterRequestDto req = new MemberRegisterRequestDto(email, password);
-
-//        memberService.registerMember(req);
-        return ResponseEntity.ok("OK").toString();
+        return "main";
     }
 
 }

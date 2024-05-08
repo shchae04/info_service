@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
  * 2024/05/07        sanghyeok       최초 생성
+ * 2024/05/08        sanghyeok       문서 비교 추가
  */
 @Controller
 @Slf4j
@@ -24,5 +25,10 @@ public class MainController {
     @GetMapping("/main")
     public String main() {
         return "main";
+    }
+
+    @GetMapping("/main/tax_v1")
+    public String taxV1() {
+        return "tax/taxV1";
     }
 }
